@@ -2,12 +2,6 @@ export const translations = {
   ar: {
     nav: { destinations: "الوجهات", offers: "العروض", about: "من نحن", contact: "اتصل بنا", signin: "دخول", book: "حجز" },
     hero: {
-      title: "اكتشف العالم بأسعار لا تُصدق.",
-      subtitle: "قارن بين رحلات الطيران والفنادق والباقات الاقتصادية في لحظات.",
-      placeholder_where: "إلى أين تريد الذهاب؟",
-      placeholder_when: "متى؟",
-      placeholder_travelers: "المسافرون",
-      btn_search: "ابحث الآن",
       badge_text: "موثوق به من قبل +50 ألف مسافر",
       title_start: "اكتشف العالم",
       title_highlight: "بأسعار لا تُصدق.",
@@ -18,6 +12,19 @@ export const translations = {
       btn_search: "بحث",
       recent_title: "عمليات البحث الأخيرة",
       clear: "مسح"
+    },
+    destinations: {
+      sub_title: "وجهات الأحلام",
+      main_title: "اختر ملاذك",
+      highlight_title: "القادم",
+      view_details: "عرض التفاصيل",
+      categories: {
+        all: "الكل",
+        beach: "شواطئ",
+        mountain: "جبال",
+        city: "مدن",
+        desert: "صحراء"
+      }
     },
     features: {
       f1_title: "رحلات اقتصادية", f1_desc: "أفضل الأسعار لرحلات الطيران العالمية.",
@@ -38,12 +45,6 @@ export const translations = {
   en: {
     nav: { destinations: "Destinations", offers: "Offers", about: "About", contact: "Contact", signin: "Sign in", book: "Book" },
     hero: {
-      title: "Discover the world at unbeatable prices.",
-      subtitle: "Compare budget flights, hotels, and packages in moments.",
-      placeholder_where: "Where to?",
-      placeholder_when: "When?",
-      placeholder_travelers: "Travelers",
-      btn_search: "Search Now",
       badge_text: "Trusted by 50k+ Happy Travelers",
       title_start: "Discover the world at",
       title_highlight: "unbeatable prices.",
@@ -54,6 +55,19 @@ export const translations = {
       btn_search: "Search",
       recent_title: "Recent Destinations",
       clear: "Clear"
+    },
+    destinations: {
+      sub_title: "Dream Destinations",
+      main_title: "Pick Your",
+      highlight_title: "Next Escape",
+      view_details: "View Details",
+      categories: {
+        all: "All",
+        beach: "Beach",
+        mountain: "Mountain",
+        city: "City",
+        desert: "Desert"
+      }
     },
     features: {
       f1_title: "Budget Flights", f1_desc: "Best prices for global flights.",
@@ -74,12 +88,6 @@ export const translations = {
   fr: {
     nav: { destinations: "Destinations", offers: "Offres", about: "À propos", contact: "Contact", signin: "Connexion", book: "Réserver" },
     hero: {
-      title: "Découvrez le monde à prix imbattables.",
-      subtitle: "Comparez vols, hôtels et forfaits économiques en un instant.",
-      placeholder_where: "Où allez-vous ?",
-      placeholder_when: "Quand ?",
-      placeholder_travelers: "Voyageurs",
-      btn_search: "Rechercher",
       badge_text: "Approuvé par +50k voyageurs",
       title_start: "Découvrez le monde à",
       title_highlight: "prix imbattables.",
@@ -90,6 +98,19 @@ export const translations = {
       btn_search: "Rechercher",
       recent_title: "Recherches récentes",
       clear: "Effacer"
+    },
+    destinations: {
+      sub_title: "Destinations de Rêve",
+      main_title: "Choisissez Votre",
+      highlight_title: "Prochaine Évasion",
+      view_details: "Voir Détails",
+      categories: {
+        all: "Tout",
+        beach: "Plage",
+        mountain: "Montagne",
+        city: "Ville",
+        desert: "Désert"
+      }
     },
     features: {
       f1_title: "Vols Économiques", f1_desc: "Meilleurs prix pour vols mondiaux.",

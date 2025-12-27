@@ -11,57 +11,58 @@ const PackageCard = ({ item }) => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -8 }}
-      className="group bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300 h-full flex flex-col"
+      whileHover={{ y: -10 }}
+      className="group bg-[#0F1724] rounded-[2rem] overflow-hidden border border-white/5 shadow-lg hover:shadow-[0_0_30px_rgba(11,103,255,0.15)] transition-all duration-300 h-full flex flex-col relative z-10"
     >
       {/* Image Container */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-72 overflow-hidden">
         <img 
           src={item.image} 
           alt={item.title} 
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-60" />
+        {/* Gradient Overlay for seamless blend */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0F1724] via-[#0F1724]/40 to-transparent" />
         
         {/* Badges */}
         <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'} flex gap-2`}>
-          <span className="bg-white/95 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-[#0B67FF] shadow-sm uppercase tracking-wider">
+          <span className="bg-[#0B67FF] backdrop-blur-md px-3 py-1 rounded-lg text-[10px] font-black text-white uppercase tracking-widest shadow-lg">
             Basic
           </span>
         </div>
         
         {/* Location Overlay */}
-        <div className={`absolute bottom-4 ${isRTL ? 'right-4' : 'left-4'} flex items-center gap-1 text-white`}>
-          <MapPin size={16} />
-          <span className="text-sm font-medium">{item.destination || "Worldwide"}</span>
+        <div className={`absolute bottom-4 ${isRTL ? 'right-6' : 'left-6'} flex items-center gap-1 text-white`}>
+          <MapPin size={16} className="text-[#0B67FF]" />
+          <span className="text-sm font-bold tracking-wide">{item.destination || "Worldwide"}</span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-1">
-        <div className="flex justify-between items-start mb-3">
-          <h3 className="text-xl font-bold text-[#0F1724] group-hover:text-[#0B67FF] transition-colors">
+      <div className="px-8 pb-8 pt-2 flex flex-col flex-1">
+        <div className="flex justify-between items-start mb-4">
+          <h3 className="text-xl font-black text-white group-hover:text-[#0B67FF] transition-colors leading-tight">
             {item.title}
           </h3>
-          <div className="flex items-center gap-1 text-amber-400">
-            <Star size={14} fill="currentColor" />
-            <span className="text-xs font-bold text-gray-400">4.8</span>
+          <div className="flex items-center gap-1 bg-white/5 px-2 py-1 rounded-lg border border-white/5">
+            <Star size={12} className="text-yellow-400 fill-yellow-400" />
+            <span className="text-xs font-bold text-white">4.8</span>
           </div>
         </div>
         
-        <p className="text-gray-500 text-sm leading-relaxed mb-6 line-clamp-2">
+        <p className="text-white/50 text-sm leading-relaxed mb-8 line-clamp-2 font-medium">
           {item.summary}
         </p>
 
-        <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
+        <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
           <div>
-            <span className="block text-xs text-gray-400 uppercase font-semibold">{t('card.from')}</span>
+            <span className="block text-[10px] text-white/30 uppercase font-black tracking-widest mb-1">{t('card.from')}</span>
             <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-[#0B67FF]">${item.price}</span>
+              <span className="text-2xl font-black text-[#0B67FF]">${item.price}</span>
             </div>
           </div>
 
-          <button className="bg-gray-50 hover:bg-[#0B67FF] text-[#0F1724] hover:text-white p-3 rounded-xl transition-all group-hover:scale-110 active:scale-95 border border-gray-100 group-hover:border-[#0B67FF]">
+          <button className="bg-white/5 hover:bg-[#0B67FF] text-white p-3 rounded-2xl transition-all group-hover:scale-110 active:scale-95 border border-white/10 group-hover:border-[#0B67FF] shadow-lg">
             <ArrowIcon size={20} />
           </button>
         </div>

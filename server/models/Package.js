@@ -7,6 +7,10 @@ const packageSchema = new mongoose.Schema({
   image: { type: String, required: true },
   category: { type: String, default: 'Budget' },
   destination: String,
+  // Added fields for date logic
+  availableFrom: { type: Date },
+  availableTo: { type: Date },
+  maxTravelers: { type: Number, default: 10 }, 
   createdAt: { type: Date, default: Date.now }
 });
 
