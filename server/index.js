@@ -1,27 +1,36 @@
-// server/index.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
+const packageRoutes = require('./routes/packageRoutes');
+
 const app = express();
+const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// --- MIDDLEWARE ---
+// This is critical: It allows your frontend to access the API
+app.use(cors({
+    origin: 'http://localhost:5173', // Your Vite dev server
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+}));
+
 app.use(express.json());
-app.use('/api/packages', require('./routes/packageRoutes'));
 
-// Basic Route for Testing
+// --- DATABASE CONNECTION ---
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/travel_db')
+    .then(() => console.log('✅ MongoDB Connected'))
+    .catch(err => console.error('❌ MongoDB Connection Error:', err));
+
+// --- ROUTES ---
+app.use('/api/packages', packageRoutes);
+
+// Basic health check
 app.get('/', (req, res) => {
-  res.send('Travel Agency API is running...');
+    res.send('Travel API is running...');
 });
 
-// Database Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/travel-basic')
-  .then(() => console.log('✅ Connected to MongoDB'))
-  .catch(err => console.error('❌ MongoDB Connection Error:', err));
-
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

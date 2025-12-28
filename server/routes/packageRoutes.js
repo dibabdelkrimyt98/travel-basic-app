@@ -12,15 +12,36 @@ router.get('/', async (req, res) => {
   }
 });
 
-// 2. ADVANCED SEARCH
-// Usage: /api/packages/search?query=Paris&date=2024-12-25&adults=2&children=1
+// 2. GET UNIQUE DESTINATIONS (For Search Autocomplete)
+router.get('/destinations', async (req, res) => {
+  try {
+    // Finds all unique distinct destination names
+    const destinations = await Package.distinct('destination');
+    // Finds min and max price for the budget slider
+    const minPrice = await Package.findOne().sort({ price: 1 }).select('price');
+    const maxPrice = await Package.findOne().sort({ price: -1 }).select('price');
+    
+    res.json({
+      destinations,
+      priceRange: {
+        min: minPrice ? minPrice.price : 0,
+        max: maxPrice ? maxPrice.price : 10000
+      }
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// 3. ADVANCED SEARCH
+// Usage: /search?query=Paris&minPrice=100&maxPrice=500&adults=2
 router.get('/search', async (req, res) => {
-  const { query, date, adults, children } = req.query;
+  const { query, date, adults, children, minPrice, maxPrice } = req.query;
   
   try {
     let filter = {};
 
-    // A. Text Search (Destination or Title)
+    // A. Text Search
     if (query) {
       filter.$or = [
         { title: { $regex: query, $options: 'i' } },
@@ -28,19 +49,24 @@ router.get('/search', async (req, res) => {
       ];
     }
 
-    // B. Date Logic 
-    // Checks if the package is available on or after the requested date
+    // B. Date Logic
     if (date) {
       const searchDate = new Date(date);
-      filter.availableFrom = { $lte: searchDate }; // Package starts before or on this date
-      filter.availableTo = { $gte: searchDate };   // Package ends after or on this date
+      filter.availableFrom = { $lte: searchDate };
+      filter.availableTo = { $gte: searchDate };
     }
 
-    // C. Capacity Logic
-    // Ensures the package can hold the total number of people
-    const totalTravelers = parseInt(adults || 1) + parseInt(children || 0);
-    if (totalTravelers) {
+    // C. Travelers (Capacity Check)
+    const totalTravelers = parseInt(adults || 0) + parseInt(children || 0);
+    if (totalTravelers > 0) {
       filter.maxTravelers = { $gte: totalTravelers };
+    }
+
+    // D. Budget Filter
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) filter.price.$gte = parseInt(minPrice);
+      if (maxPrice) filter.price.$lte = parseInt(maxPrice);
     }
 
     const results = await Package.find(filter).sort({ price: 1 });

@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-  "client": "cd client && npm run dev",
-  "server": "cd server && npm run dev",
-  "dev": "concurrently \"npm run server\" \"npm run client\""
-},
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
 }
